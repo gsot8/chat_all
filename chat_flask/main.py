@@ -24,10 +24,12 @@ def send_text():
 
 @socketio.on('message')
 def handle_message(value):
+    print(value)
     current_time = str(datetime.datetime.now())
-    print('received message: ' + value +current_time)
+    print('received message: ' + value[1] + value[0] + current_time)
     mas.append({
-        'msg': value,
+        'user' : value[1],
+        'msg': value[0],
         'time': current_time
     })
     emit('add_message', mas[-1], broadcast=True)

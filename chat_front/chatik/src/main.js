@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import Message from './Message';
+import Button from 'react-bootstrap/Button';
 
-const socket = io("http://127.0.0.1:5000");
+
 export default function Main(){
     const [input, setInput] = useState("")
-    const [isConnected, setIsConnected] = useState(socket.connected);
+    const [socket, setSocket] = useState(io("http://127.0.0.1:5000")); 
+    const [isConnected, setIsConnected] = useState(false);
     const [mas, setAllMessage] = useState([])
-    useEffect(() => {    
+    const login = localStorage.getItem("login")
+    useEffect(() => {  
         socket.on('connect', () => console.log('Подключен '));
         socket.on('all_message', (mas) => setAllMessage(mas)
         );
@@ -24,10 +27,10 @@ export default function Main(){
     }, []);
     return <>
 		<input value={input} onInput={e => setInput(e.target.value)}/>
-        <button onClick = {()=>socket.emit('message', input)}>click
-        </button>
+        <Button onClick = {()=>socket.emit('message', [input,login])}>click
+        </Button>
         <div>
-            <table><tbody>{mas.map((e) => <Message msg={e.msg} time={e.time}/>)}</tbody></table>
+            <table><tbody>{mas.map((e) => <Message user = {e.user} msg={e.msg} time={e.time}/>)}</tbody></table>
         </div>
     </>
 }
