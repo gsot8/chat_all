@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Entrance from './Entrance';
 
 function App() {
+  
   return (
     <BrowserRouter>
   <Link to='/main'>main</Link>

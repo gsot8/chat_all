@@ -2,3 +2,4 @@ chat_front/node_modules
 chat_flask/.venv
 .idea
 chat_flask/.idea
+chat_flask/database/database.db
