@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Main from './main';
 import Entrance from './Entrance';
+import Registration from './Registration'
 import { RouterProvider,createBrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,6 +15,8 @@ const router = createBrowserRouter([
       element: <Entrance/>    },
   {        path: "/main",
       element: <Main/>,    },
+      {        path: "/reg",
+      element: <Registration/>,    },
   ,
 ]);
 

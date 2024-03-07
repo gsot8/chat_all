@@ -5,31 +5,31 @@ import Input from 'react-bootstrap/InputGroup';
 import { InputGroup } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 
-export default function Entrance(){
+
+export default function Registration(){
     const [login,setLogin] = useState("")
     const [password, setPassword] = useState("")
     const [clicked, setClicked] = useState(false)
-    const [clickedOnRegistration, setClickedOnRegistration] = useState(false)
 
     return(
         <div>
             <InputGroup  value={login} onInput={e => setLogin(e.target.value)}>
-                <Form.Control  aria-label="Text input with radio button"/>
+                <Form.Control  aria-label="login"/>
+                </InputGroup>
+                <InputGroup  value={password} onInput={e => setPassword(e.target.value)}>
+                <Form.Control  aria-label="Password"/>
                 </InputGroup>
         <Button onClick= {e => {
             localStorage.setItem('login',login)
             setClicked(true)
-            }} > click 
+            fetch("http://localhost:5000/reg", 
+                {  
+                      method: "POST",  
+                      body: JSON.stringify({login: login,password : password}),  
+                      headers: {'Content-Type': 'application/json'},
+            })}} > Registration
             </Button>
-        <Button  onClick= {e => {
-           
-            setClickedOnRegistration(true)}}>
-            Registration
-        </Button>
-
             {clicked && <Navigate to='/main' />}
-            {clickedOnRegistration && <Navigate to='/reg' />}
         </div>
     )
-    
 }

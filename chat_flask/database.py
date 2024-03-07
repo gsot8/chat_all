@@ -12,6 +12,8 @@ class User(Base):
     __tablename__ = "user"
     login: Mapped[str] = mapped_column(String, primary_key=True)
     password: Mapped[str] = mapped_column(String, primary_key=False)
+    token: Mapped[str] = mapped_column(String, primary_key=False)
+
 
 
 class Message(Base):

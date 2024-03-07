@@ -1,12 +1,19 @@
 from database import db, User, Message
 from flask_socketio import emit
 import datetime
+import secrets
 
-from chat_flask.app import socketio
-
+from chat_flask.app import socketio,app
 mas = []
 
-
+@app.route('/reg')
+def create_user(e):
+    user_dict = {
+        'login': e.get('login'),
+        'password': e.get('password'),
+        'token': secrets.token_hex(20)
+    }
+    user = User(**user_dict)
 @socketio.on('connect')
 def send_text():
     mas = list(map(lambda x: x.__dict__, db.session.query(Message).all()))
@@ -27,6 +34,7 @@ def handle_message(value):
         'content': value[0],
         'time': current_time
     }
+
     message = Message(**message_dict)
     db.session.add(message)
     db.session.commit()
