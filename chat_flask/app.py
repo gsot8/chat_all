@@ -3,6 +3,7 @@ from flask_socketio import SocketIO
 from database import db
 import os
 
+print("sqlite:///" + os.path.abspath(os.getcwd())+"\\database\\database.db")
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.abspath(os.getcwd())+"\\database\\database.db"
 db.init_app(app)
