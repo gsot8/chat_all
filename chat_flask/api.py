@@ -1,3 +1,5 @@
+from flask_cors import CORS
+from flask import request
 from database import db, User, Message
 from flask_socketio import emit
 import datetime
@@ -8,14 +10,15 @@ from app import socketio, app
 mas = []
 
 
-@app.route('/reg')
-def create_user(e):
+@app.route('/reg', methods=["POST"])
+def create_user():
     user_dict = {
-        'login': e.get('login'),
-        'password': e.get('password'),
+        'login': request.json.get('login'),
+        'password': request.json.get('password'),
         'token': secrets.token_hex(20)
     }
     user = User(**user_dict)
+    return "???"
 
 
 @socketio.on('connect')
@@ -51,4 +54,5 @@ def handle_message(value):
     emit('add_message', message_dict, broadcast=True)
 
 
+cors = CORS(app,resources={r"/*":{"origins":"*"}})
 socketio.run(app, allow_unsafe_werkzeug=True)

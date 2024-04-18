@@ -11,7 +11,7 @@ with app.app_context():
     db.create_all()
 
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app, cors_allowed_origins=['http://localhost:3000'])
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 
 

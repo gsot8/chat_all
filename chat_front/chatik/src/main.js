@@ -28,7 +28,7 @@ export default function Main(){
     }, []);
     return <>
 		<input value={input} onInput={e => setInput(e.target.value)}/>
-        <Button onClick = {()=>socket.emit('message', [input,""])}>click
+        <Button onClick = {()=>socket.emit('message', [input,localStorage.getItem("login")])}>click
         </Button>
         <div>
             <table><tbody>{mas.map((e) => <Message user = {e.login} msg={e.content} time={e.time}/>)}</tbody></table>
