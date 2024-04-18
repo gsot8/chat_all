@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 export default function Main(){
     const [input, setInput] = useState("")
-    const [socket, setSocket] = useState(() => io("http://127.0.0.1:5000")); 
+    const [socket, setSocket] = useState(() => io("")); 
     const [isConnected, setIsConnected] = useState(false);
     const [mas, setAllMessage] = useState([])
     // const login = localStorage.getItem("login")

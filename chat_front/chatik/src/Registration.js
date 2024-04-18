@@ -22,7 +22,7 @@ export default function Registration(){
         <Button onClick= {e => {
             localStorage.setItem('login',login)
             setClicked(true)
-            fetch("http://localhost:5000/reg", 
+            fetch("/reg", 
                 {  
                       method: "POST",  
                       body: JSON.stringify({login: login,password : password}),  
